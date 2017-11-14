@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team236.robot;
 
+import org.usfirst.frc.team236.robot.subsystems.Climber;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -13,14 +15,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot {
 
+	// Declare subsystems
+	public static Climber climber;
+
 	@Override
 	public void robotInit() {
-		
-	}
-	
-	@Override
-	public void teleopInit() {
-		
+		climber = new Climber();
 	}
 	
 	@Override
