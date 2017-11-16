@@ -41,6 +41,6 @@ public class OI {
 	public OI() {
 		controller = new LogitechF310(2);
 		
-		controller.x.whileHeld(new Climb());
+		controller.lb.whileHeld(new Climb());
 	}
 }
