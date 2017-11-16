@@ -1,6 +1,10 @@
 package org.usfirst.frc.team236.robot;
 
 import org.usfirst.frc.team236.robot.commands.Climb;
+import org.usfirst.frc.team236.robot.commands.Grasp;
+import org.usfirst.frc.team236.robot.commands.Lower;
+import org.usfirst.frc.team236.robot.commands.Raise;
+import org.usfirst.frc.team236.robot.commands.Release;
 
 import lib.oi.LogitechF310;
 
@@ -42,5 +46,11 @@ public class OI {
 		controller = new LogitechF310(2);
 		
 		controller.lb.whileHeld(new Climb());
+		
+		controller.y.whenPressed(new Raise());
+		controller.a.whenPressed(new Lower());
+		
+		controller.x.whenPressed(new Grasp());
+		controller.b.whenPressed(new Release());
 	}
 }
