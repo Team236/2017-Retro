@@ -7,6 +7,7 @@ import org.usfirst.frc.team236.robot.commands.Raise;
 import org.usfirst.frc.team236.robot.commands.Release;
 
 import lib.oi.LogitechF310;
+import lib.oi.Thrustmaster;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -41,9 +42,12 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	public LogitechF310 controller;
+	public Thrustmaster leftStick, rightStick;
 	
 	public OI() {
 		controller = new LogitechF310(2);
+		leftStick = new Thrustmaster(ControlMap.PORT_LEFT);
+		rightStick = new Thrustmaster(ControlMap.PORT_RIGHT);
 		
 		controller.lb.whileHeld(new Climb());
 		
