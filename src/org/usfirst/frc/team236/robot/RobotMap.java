@@ -9,6 +9,8 @@ import lib.pid.PIDParameters;
  * floating around.
  */
 public class RobotMap {
+	public static int[] DIO_SWITCHES = { 0, 1, 2 };
+
 	public static class Climber {
 		public static final int PWM_CLIMBER = 7;
 	}
