@@ -45,7 +45,7 @@ public class OI {
 	public Thrustmaster leftStick, rightStick;
 	
 	public OI() {
-		controller = new LogitechF310(2);
+		controller = new LogitechF310(ControlMap.PORT_CONTROLLER);
 		leftStick = new Thrustmaster(ControlMap.PORT_LEFT);
 		rightStick = new Thrustmaster(ControlMap.PORT_RIGHT);
 		
