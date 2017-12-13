@@ -12,7 +12,7 @@ public class RobotMap {
 	public static class Climber {
 		public static final int PWM_CLIMBER = 7;
 	}
-	
+
 	public static class Garage {
 		public static final int SOL_GRASPER_FORWARD = 2;
 		public static final int SOL_GRASPER_REVERSE = 3;
