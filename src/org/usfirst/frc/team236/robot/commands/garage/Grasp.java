@@ -1,4 +1,4 @@
-package org.usfirst.frc.team236.robot.commands;
+package org.usfirst.frc.team236.robot.commands.garage;
 
 import org.usfirst.frc.team236.robot.Robot;
 
@@ -7,15 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Raise extends Command {
+public class Grasp extends Command {
 
-    public Raise() {
+    public Grasp() {
     	requires(Robot.garage);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.garage.raise();
+    	Robot.garage.grasp();
     }
 
     // Called repeatedly when this Command is scheduled to run
