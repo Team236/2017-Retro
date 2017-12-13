@@ -2,6 +2,7 @@
 package org.usfirst.frc.team236.robot;
 
 import org.usfirst.frc.team236.robot.subsystems.Climber;
+import org.usfirst.frc.team236.robot.subsystems.Drive;
 import org.usfirst.frc.team236.robot.subsystems.Garage;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -16,14 +17,19 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot {
 
+	// Declare OI
+	public static OI oi;
 	// Declare subsystems
 	public static Climber climber;
 	public static Garage garage;
+	public static Drive drive;
 
 	@Override
 	public void robotInit() {
+		// Create subsystems
 		climber = new Climber();
 		garage = new Garage();
+		drive = new Drive();
 	}
 	
 	@Override

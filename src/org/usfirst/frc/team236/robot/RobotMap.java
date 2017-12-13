@@ -1,5 +1,7 @@
 package org.usfirst.frc.team236.robot;
 
+import lib.pid.PIDParameters;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -17,5 +19,29 @@ public class RobotMap {
 
 		public static final int SOL_VERTICAL_FORWARD = 4;
 		public static final int SOL_VERTICAL_REVERSE = 5;
+	}
+
+	public static class Drive {
+		public static final int ID_LEFT_FRONT = 1;
+		public static final int ID_LEFT_REAR = 3;
+		public static final int ID_RIGHT_FRONT = 4;
+		public static final int ID_RIGHT_REAR = 2;
+
+		public static final int SOL_FORWARD = 0;
+		public static final int SOL_REVERSE = 1;
+
+		public static final double DIAMETER = 3.92;
+		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
+		public static final double PULSE_PER_ROTATION = 128;
+		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
+
+		public static class PID {
+			public static final double P = 0.0;
+			public static final double I = 0.0;
+			public static final double D = 0.0;
+			public static final double F = 0.0;
+		}
+
+		public static PIDParameters TURN_PARAMS = new PIDParameters(0.00, 0.00, 0.00, 1 / 100.0);
 	}
 }
