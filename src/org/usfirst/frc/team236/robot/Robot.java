@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		drive.resetEncoders();
+		drive.zeroEncoders();
 	}
 
 	@Override

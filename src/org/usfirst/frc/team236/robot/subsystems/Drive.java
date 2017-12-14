@@ -84,11 +84,6 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 		rightMaster.changeControlMode(TalonControlMode.PercentVbus);
 	}
 	
-	public void resetEncoders() {
-		leftMaster.setPosition(0);
-		rightMaster.setPosition(0);
-	}
-	
 	public void setLeftSpeed(double speed) {
 		leftMaster.set(speed);
 	}
@@ -139,8 +134,8 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 
 	@Override
 	public void pidSet(double speed) {
-		leftMaster.set(speed);
-		rightMaster.set(-speed);
+		setLeftSpeed(speed);
+		setRightSpeed(-speed);
 	}
 
 	@Override
