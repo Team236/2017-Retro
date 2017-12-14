@@ -44,6 +44,6 @@ public class RobotMap {
 			public static final double F = 0.0;
 		}
 
-		public static PIDParameters TURN_PARAMS = new PIDParameters(0.00, 0.00, 0.00, 1 / 100.0);
+		public static PIDParameters TURN_PARAMS = new PIDParameters(0.015, 0.007, 0.000, 1 / 100.0);
 	}
 }
