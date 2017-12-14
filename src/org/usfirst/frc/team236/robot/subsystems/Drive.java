@@ -36,6 +36,12 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 		leftSlave = new CANTalon(RobotMap.Drive.ID_LEFT_REAR);
 		rightSlave = new CANTalon(RobotMap.Drive.ID_RIGHT_REAR);
 		
+		leftSlave.changeControlMode(TalonControlMode.Follower);
+		rightSlave.changeControlMode(TalonControlMode.Follower);
+		
+		leftSlave.set(leftMaster.getDeviceID());
+		rightSlave.set(rightMaster.getDeviceID());
+		
 		shifter = new DoubleSolenoid(RobotMap.Drive.SOL_FORWARD, RobotMap.Drive.SOL_REVERSE);
 		
 		navx = new AHRS(SPI.Port.kMXP);
