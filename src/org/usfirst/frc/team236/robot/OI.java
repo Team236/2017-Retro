@@ -1,6 +1,8 @@
 package org.usfirst.frc.team236.robot;
 
 import org.usfirst.frc.team236.robot.commands.Climb;
+import org.usfirst.frc.team236.robot.commands.drive.ShiftDown;
+import org.usfirst.frc.team236.robot.commands.drive.ShiftUp;
 import org.usfirst.frc.team236.robot.commands.garage.Grasp;
 import org.usfirst.frc.team236.robot.commands.garage.Lower;
 import org.usfirst.frc.team236.robot.commands.garage.Raise;
@@ -8,6 +10,8 @@ import org.usfirst.frc.team236.robot.commands.garage.Release;
 
 import lib.oi.LogitechF310;
 import lib.oi.Thrustmaster;
+import lib.oi.triggers.JoystickPOV;
+import lib.oi.triggers.JoystickPOV.Direction;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -29,5 +33,11 @@ public class OI {
 		
 		controller.x.whenPressed(new Grasp());
 		controller.b.whenPressed(new Release());
+		
+		JoystickPOV leftJoyUp = new JoystickPOV(leftStick, Direction.UP);
+		JoystickPOV leftJoyDown = new JoystickPOV(leftStick, Direction.DOWN);
+
+		leftJoyUp.whenPressed(new ShiftUp());
+		leftJoyDown.whenPressed(new ShiftDown());
 	}
 }
