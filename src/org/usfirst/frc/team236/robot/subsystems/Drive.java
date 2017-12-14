@@ -61,12 +61,12 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	}
 
 	public void shiftUp() {
-		this.shifter.set(Value.kForward);
+		this.shifter.set(Value.kReverse);
 		gear = Gear.HIGH;
 	}
 	
 	public void shiftDown() {
-		this.shifter.set(Value.kReverse);
+		this.shifter.set(Value.kForward);
 		gear = Gear.LOW;
 	}
 	
