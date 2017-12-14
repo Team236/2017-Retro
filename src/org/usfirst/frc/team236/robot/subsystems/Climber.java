@@ -1,7 +1,6 @@
 package org.usfirst.frc.team236.robot.subsystems;
 
 import org.usfirst.frc.team236.robot.RobotMap;
-import org.usfirst.frc.team236.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -22,7 +21,6 @@ public class Climber extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Climb());
 	}
 
 	public void setSpeed(double speed) {
