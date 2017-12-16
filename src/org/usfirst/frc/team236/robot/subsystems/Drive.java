@@ -75,38 +75,62 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 		return gear;
 	}
 	
+	/**
+	 * Put both sides in motion magic mode
+	 */
 	public void goMotionMagic() {
 		leftMaster.changeControlMode(TalonControlMode.MotionMagic);
 		rightMaster.changeControlMode(TalonControlMode.MotionMagic);
 	}
 	
+	/**
+	 * Put both sides in percent vbus mode
+	 */
 	public void goPercentVbus() {
 		leftMaster.changeControlMode(TalonControlMode.PercentVbus);
 		rightMaster.changeControlMode(TalonControlMode.PercentVbus);
 	}
 	
+	/**
+	 * Set left speed from -1 to 1. ONLY USE THIS IN PERCENT-VBUS MODE
+	 */
 	public void setLeftSpeed(double speed) {
 		leftMaster.set(speed);
 	}
 	
+	/**
+	 * Set right speed from -1 to 1. ONLY USE THIS IN PERCENT-VBUS MODE
+	 */
 	public void setRightSpeed(double speed) {
 		rightMaster.set(-speed);
 	}
 	
+	/**
+	 * Set speeds from -1 to 1. ONLY USE THIS IN PERCENT-VBUS MODE
+	 */
 	public void setSpeeds(double left, double right) {
 		this.setLeftSpeed(left);
 		this.setRightSpeed(right);
 	}
 
+	/**
+	 * Set encoders to 0
+	 */
 	public void zeroEncoders() {
 		leftMaster.setPosition(0);
 		rightMaster.setPosition(0);
 	}
 	
+	/**
+	 * Stop motors. ONLY USE THIS IN PERCENT-VBUS MODE
+	 */
 	public void stop() {
 		this.setSpeeds(0, 0);
 	}
 	
+	/**
+	 * Set up default direction settings.
+	 */
 	private void configDirection() {
 		leftMaster.reverseSensor(true);
 		rightMaster.reverseSensor(true);
@@ -115,6 +139,9 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 		leftMaster.reverseSensor(false);
 	}
 	
+	/**
+	 * Configure default PID parameters
+	 */
 	private void configPID() {
 		leftMaster.setP(RobotMap.Drive.PID.P);
 		leftMaster.setI(RobotMap.Drive.PID.I);
@@ -125,6 +152,11 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 		rightMaster.setD(RobotMap.Drive.PID.D);
 	}
 	
+	/**
+	 * Set up default motion magic parameters
+	 * @param cruise Cruise velocity
+	 * @param accel Maximum acceleration
+	 */
 	public void configMotionMagic(double cruise, double accel) {
 		leftMaster.setMotionMagicCruiseVelocity(cruise);
 		leftMaster.setMotionMagicAcceleration(accel);

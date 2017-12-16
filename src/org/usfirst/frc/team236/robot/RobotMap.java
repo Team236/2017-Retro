@@ -21,6 +21,8 @@ public class RobotMap {
 
 		public static final int SOL_VERTICAL_FORWARD = 4;
 		public static final int SOL_VERTICAL_REVERSE = 5;
+		
+		public static final int RELAY_FLASHLIGHT = 0;
 	}
 
 	public static class Drive {

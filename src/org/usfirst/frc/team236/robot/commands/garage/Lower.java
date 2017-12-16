@@ -16,6 +16,7 @@ public class Lower extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.garage.lower();
+    	Robot.garage.lightOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
