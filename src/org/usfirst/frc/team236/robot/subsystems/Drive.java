@@ -48,6 +48,7 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 		
 		configDirection();
 		configPID();
+		configMotionMagic(RobotMap.Drive.CRUISE_VELOCITY, RobotMap.Drive.MAX_ACCEL);
 	}
 	
 	public enum Gear {

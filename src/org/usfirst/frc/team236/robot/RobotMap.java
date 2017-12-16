@@ -36,6 +36,9 @@ public class RobotMap {
 		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
 		public static final double PULSE_PER_ROTATION = 128;
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
+		
+		public static final double CRUISE_VELOCITY = 0;
+		public static final double MAX_ACCEL = 0;
 
 		public static class PID {
 			public static final double P = 0.0;
