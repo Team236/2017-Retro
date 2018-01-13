@@ -28,7 +28,6 @@ public class Turn extends Command {
 	}
 
 	protected void initialize() {
-		Robot.drive.goPercentVbus();
 		pid.setSetpoint(distance);
 		pid.enable();
 	}

@@ -2,6 +2,8 @@ package org.usfirst.frc.team236.robot.commands.drive;
 
 import org.usfirst.frc.team236.robot.Robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,10 +22,8 @@ public class MotionMagic extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.goMotionMagic();
-    	
-    	Robot.drive.leftMaster.set(distance);
-    	Robot.drive.rightMaster.set(-distance);
+    	Robot.drive.leftMaster.set(ControlMode.MotionMagic, distance);
+    	Robot.drive.rightMaster.set(ControlMode.MotionMagic, -distance);
     }
 
     // Called repeatedly when this Command is scheduled to run

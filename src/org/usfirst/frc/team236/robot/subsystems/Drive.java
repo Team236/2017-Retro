@@ -3,8 +3,8 @@ package org.usfirst.frc.team236.robot.subsystems;
 import org.usfirst.frc.team236.robot.RobotMap;
 import org.usfirst.frc.team236.robot.commands.drive.DriveWithJoysticks;
 
-import com.ctre.CANTalon;
-import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -22,8 +22,8 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	public CANTalon leftMaster, leftSlave;
-	public CANTalon rightMaster, rightSlave;
+	public TalonSRX leftMaster, leftSlave;
+	public TalonSRX rightMaster, rightSlave;
 	
 	private DoubleSolenoid shifter;
 	public Gear gear;
@@ -31,22 +31,19 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	public AHRS navx;
 
 	public Drive() {
-		leftMaster = new CANTalon(RobotMap.Drive.ID_LEFT_FRONT);
-		rightMaster = new CANTalon(RobotMap.Drive.ID_RIGHT_FRONT);
-		leftSlave = new CANTalon(RobotMap.Drive.ID_LEFT_REAR);
-		rightSlave = new CANTalon(RobotMap.Drive.ID_RIGHT_REAR);
+		leftMaster = new TalonSRX(RobotMap.Drive.ID_LEFT_FRONT);
+		rightMaster = new TalonSRX(RobotMap.Drive.ID_RIGHT_FRONT);
+		leftSlave = new TalonSRX(RobotMap.Drive.ID_LEFT_REAR);
+		rightSlave = new TalonSRX(RobotMap.Drive.ID_RIGHT_REAR);
 		
-		leftSlave.changeControlMode(TalonControlMode.Follower);
-		rightSlave.changeControlMode(TalonControlMode.Follower);
-		
-		leftSlave.set(leftMaster.getDeviceID());
-		rightSlave.set(rightMaster.getDeviceID());
+		leftSlave.set(ControlMode.Follower, leftMaster.getDeviceID());
+		rightSlave.set(ControlMode.Follower, rightMaster.getDeviceID());
 		
 		shifter = new DoubleSolenoid(RobotMap.Drive.SOL_FORWARD, RobotMap.Drive.SOL_REVERSE);
 		
 		navx = new AHRS(SPI.Port.kMXP);
 		
-		configDirection();
+		//configDirection();
 		configPID();
 		configMotionMagic(RobotMap.Drive.CRUISE_VELOCITY, RobotMap.Drive.MAX_ACCEL);
 	}
@@ -76,37 +73,21 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	}
 	
 	/**
-	 * Put both sides in motion magic mode
-	 */
-	public void goMotionMagic() {
-		leftMaster.changeControlMode(TalonControlMode.MotionMagic);
-		rightMaster.changeControlMode(TalonControlMode.MotionMagic);
-	}
-	
-	/**
-	 * Put both sides in percent vbus mode
-	 */
-	public void goPercentVbus() {
-		leftMaster.changeControlMode(TalonControlMode.PercentVbus);
-		rightMaster.changeControlMode(TalonControlMode.PercentVbus);
-	}
-	
-	/**
-	 * Set left speed from -1 to 1. ONLY USE THIS IN PERCENT-VBUS MODE
+	 * Set left speed from -1 to 1.
 	 */
 	public void setLeftSpeed(double speed) {
-		leftMaster.set(speed);
+		leftMaster.set(ControlMode.PercentOutput, speed);
 	}
 	
 	/**
-	 * Set right speed from -1 to 1. ONLY USE THIS IN PERCENT-VBUS MODE
+	 * Set right speed from -1 to 1.
 	 */
 	public void setRightSpeed(double speed) {
-		rightMaster.set(-speed);
+		rightMaster.set(ControlMode.PercentOutput, -speed);
 	}
 	
 	/**
-	 * Set speeds from -1 to 1. ONLY USE THIS IN PERCENT-VBUS MODE
+	 * Set speeds from -1 to 1.
 	 */
 	public void setSpeeds(double left, double right) {
 		this.setLeftSpeed(left);
@@ -117,8 +98,8 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	 * Set encoders to 0
 	 */
 	public void zeroEncoders() {
-		leftMaster.setPosition(0);
-		rightMaster.setPosition(0);
+		leftMaster.setSelectedSensorPosition(0,0,0);
+		rightMaster.setSelectedSensorPosition(0,0,0);
 	}
 	
 	/**
@@ -132,24 +113,26 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	 * Set up default direction settings.
 	 */
 	private void configDirection() {
+		/*
 		leftMaster.reverseSensor(true);
 		rightMaster.reverseSensor(true);
 		
 		rightMaster.reverseSensor(false);
 		leftMaster.reverseSensor(false);
+		*/
 	}
 	
 	/**
 	 * Configure default PID parameters
 	 */
 	private void configPID() {
-		leftMaster.setP(RobotMap.Drive.PID.P);
-		leftMaster.setI(RobotMap.Drive.PID.I);
-		leftMaster.setD(RobotMap.Drive.PID.D);
+		leftMaster.config_kP(0, RobotMap.Drive.PID.P, 0);
+		leftMaster.config_kI(0, RobotMap.Drive.PID.I, 0);
+		leftMaster.config_kD(0, RobotMap.Drive.PID.D, 0);
 
-		rightMaster.setP(RobotMap.Drive.PID.P);
-		rightMaster.setI(RobotMap.Drive.PID.I);
-		rightMaster.setD(RobotMap.Drive.PID.D);
+		rightMaster.config_kP(0, RobotMap.Drive.PID.P, 0);
+		rightMaster.config_kI(0, RobotMap.Drive.PID.I, 0);
+		rightMaster.config_kD(0, RobotMap.Drive.PID.D, 0);
 	}
 	
 	/**
@@ -158,11 +141,11 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	 * @param accel Maximum acceleration
 	 */
 	public void configMotionMagic(double cruise, double accel) {
-		leftMaster.setMotionMagicCruiseVelocity(cruise);
-		leftMaster.setMotionMagicAcceleration(accel);
+		leftMaster.configMotionCruiseVelocity((int) cruise, 0);
+		leftMaster.configMotionAcceleration((int) accel, 0);
 
-		rightMaster.setMotionMagicCruiseVelocity(cruise);
-		rightMaster.setMotionMagicAcceleration(accel);
+		rightMaster.configMotionCruiseVelocity((int) cruise, 0);
+		rightMaster.configMotionAcceleration((int) accel, 0);
 	}
 
 	@Override

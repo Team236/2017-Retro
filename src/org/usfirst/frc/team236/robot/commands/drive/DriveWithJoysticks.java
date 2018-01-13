@@ -14,7 +14,6 @@ public class DriveWithJoysticks extends Command {
 	}
 
 	protected void initialize() {
-		Robot.drive.goPercentVbus();
 	}
 
 	protected void execute() {
