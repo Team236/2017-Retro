@@ -13,6 +13,7 @@ import org.usfirst.frc.team236.robot.subsystems.Garage;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.AutoHandler;
 import lib.commands.DoNothing;
 
@@ -82,6 +83,9 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putNumber("Left distance", drive.leftMaster.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Right distance", drive.rightMaster.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Right distance", drive.rightMaster.getSelectedSensorVelocity(0));
 		Scheduler.getInstance().run();
 	}
 }
