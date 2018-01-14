@@ -7,6 +7,7 @@ import org.usfirst.frc.team236.robot.commands.garage.Grasp;
 import org.usfirst.frc.team236.robot.commands.garage.Lower;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import lib.commands.Test;
 
 /**
  *
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StraightMotionMagic extends CommandGroup {
 
     public StraightMotionMagic() {
+    	addSequential(new Test("Straight motion magic"), 1);
     	addSequential(new Grasp());
     	addSequential(new Lower());
     	addSequential(new ShiftDown());
