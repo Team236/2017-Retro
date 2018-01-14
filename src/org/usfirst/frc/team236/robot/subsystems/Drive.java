@@ -103,7 +103,7 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput{
 	}
 	
 	/**
-	 * Stop motors. ONLY USE THIS IN PERCENT-VBUS MODE
+	 * Stop motors.
 	 */
 	public void stop() {
 		this.setSpeeds(0, 0);
